@@ -27,5 +27,5 @@ HTML,
 
   // VALFRI notis längst ner
   
-  'note' => 'Denna dikt ingår i diktsamlingen <a href="bocker.php?slug=ekskeppet">Ekskeppet</a>.',
+  'note' => 'Denna dikt ingår i diktsamlingen <a href="/bocker/index.php?slug=ekskeppet">Ekskeppet</a>.',
 ];
