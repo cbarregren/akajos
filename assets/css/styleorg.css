@@ -1,0 +1,1239 @@
+/* =========================================================
+   Bas / variabler
+   ========================================================= */
+
+:root{
+  --bg: #ffffff;
+  --paper: #ffffff;
+  --text: #3a3a3a;
+  --muted: #7a7a7a;
+  --line: #d9d9d9;
+  --shadow: 0 6px 18px rgba(0,0,0,.06);
+  --max: 1080px;
+
+  /* Böcker: omslag i listläge */
+  --book-cover-w: 200px;     /* 180–240px */
+  --book-cover-maxh: 260px;  /* maxhöjd i listläge */
+}
+
+*{ box-sizing: border-box; }
+html, body{ height: 100%; }
+
+body{
+  margin: 0;
+  font-family: "Avenir Next", Avenir, "Open Sans", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.55;
+}
+
+a{
+  color: inherit;
+  text-decoration: none;
+}
+
+/* =========================================================
+   Topbar / Navigation
+   ========================================================= */
+
+.topbar{
+  background: var(--paper);
+  border-bottom: 1px solid #efefef;
+  padding: 34px 0 25px;
+}
+
+.topbar__inner{
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+
+  position: relative; /* behövs för mobil-dropdown */
+}
+
+/* Desktop-nav */
+.nav{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 28px;
+}
+
+.nav a{
+  color: #5a5a5a;
+  letter-spacing: .08em;
+  font-size: 14px;
+  text-transform: uppercase;
+
+  /* Byt ut border-underline till pseudo-element (så den inte “ramlar ned”) */
+  position: relative;
+  padding: 14px 10px 18px; /* extra bottenluft, underline styrs separat */
+}
+
+.nav a:hover{ color: #2f2f2f; }
+
+/* Underline som inte krockar med hero */
+.nav a::after{
+  content: "";
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 8px;         /* justera 6–10px vid behov */
+  height: 2px;
+  background: transparent;
+}
+
+.nav a[aria-current="page"]{
+  color: #2f2f2f;
+}
+
+.nav a[aria-current="page"]::after{
+  background: #2f2f2f;
+}
+
+.nav a:hover::after{
+  background: rgba(47,47,47,.35);
+}
+
+/* Mobil: MENY-knapp (visas i media query) */
+.nav-toggle{
+  display: none; /* desktop */
+  border: 1px solid rgba(0,0,0,.18);
+  background: #fff;
+  border-radius: 999px;
+  padding: 14px 18px;
+  font-size: 13px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: #2f2f2f;
+}
+
+/* =========================================================
+   Hero
+   ========================================================= */
+
+.hero{
+  width: 100%;
+  background: #ddd;
+  margin-top: 1px; /* liten separation från topbar (kan vara 0 också) */
+}
+
+.hero img{
+  display: block;
+  width: 100%;
+  height: clamp(240px, 40vw, 520px);
+  object-fit: cover;
+}
+
+/* =========================================================
+   Layout – när hero saknas
+   ========================================================= */
+
+.content{
+  padding-top: 48px; /* grundluft */
+}
+
+/* När hero finns: ta bort extra luft */
+.hero + .content{
+  padding-top: 0;
+}
+
+/* =========================================================
+   Layout / Section / Paper
+   ========================================================= */
+
+.content{
+  background: #ffffff;
+  padding-bottom: 1px;
+}
+
+.section{
+  max-width: var(--max);
+  margin: 28px auto;
+  padding: 0 18px;
+}
+
+.paper{
+  background: var(--paper);
+  border: 1px dashed var(--line);
+  box-shadow: var(--shadow);
+}
+
+.paper__inner{
+  padding: clamp(20px, 2.8vw, 44px);
+}
+
+/* =========================================================
+   Intro
+   ========================================================= */
+
+.intro{
+  padding: 44px 24px 58px;
+  text-align: center;
+}
+
+.intro h1{
+  margin: 0 0 10px;
+  font-size: clamp(32px, 4vw, 54px);
+  letter-spacing: .06em;
+  font-weight: 600;
+  color: #6b6b6b;
+}
+
+.intro .subtitle{
+  margin: 0;
+  color: var(--muted);
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+/* =========================================================
+   Intro – ingress under rubrik (index + böcker)
+   ========================================================= */
+
+.intro > p:not(.subtitle){
+  margin: 12px auto 0;
+  max-width: 58ch;
+  font-size: 18px;
+  line-height: 1.8;
+  color: #6a6a6a;
+  text-transform: uppercase;
+}
+
+/* =========================================================
+   Grid / Cards (Start + blocks)
+   ========================================================= */
+
+.grid{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+  padding: 22px;
+}
+
+.card{
+  border: 1px solid #efefef;
+  background: #fff;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.card__media{
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  background: #eee;
+}
+
+.card__media img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.card__body{
+  padding: 26px 22px 22px;
+  text-align: left;
+  font-size: 18px 
+}
+
+.card__title{
+  margin: 0 0 12px;
+  font-size: 26px;
+  font-weight: 600;
+  color: #6b6b6b;
+}
+
+.card__text{
+  margin: 0 auto 18px;
+  max-width: 52ch;
+  color: #6f6f6f;
+
+}
+
+.card__link{
+  display: inline-block;
+  color: #2f2f2f;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  font-size: 12px;
+  border-bottom: 1px dotted #2f2f2f;
+  padding-bottom: 4px;
+}
+
+.card__link:hover{ 
+	opacity: .85; 
+	border-bottom: 2px solid #2f2f2f;
+}
+
+.card__link:hover{ opacity: .85; }
+
+/* =========================================================
+   Läsbarhet (Sagor/inlägg)
+   ========================================================= */
+
+.reading{
+  max-width: 70ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.prose{
+  font-size: 18px;
+  line-height: 1.9;
+  letter-spacing: 0.01em;
+  color: #4a4a4a;
+}
+
+.prose h1, .prose h2, .prose h3{
+  line-height: 1.2;
+  letter-spacing: .06em;
+  color: #6b6b6b;
+  margin: 0 0 18px;
+  text-align: center;
+}
+
+.prose p{ margin: 0 0 1.15em; }
+
+.prose a{
+  color: #2f2f2f;
+  border-bottom: 1px dotted #2f2f2f;
+}
+
+.prose a:hover{ 
+	opacity: .85; 
+	border-bottom: 2px solid #2f2f2f;
+}
+
+.excerpt{
+  margin: 10px 0 14px;
+  max-width: 65ch;
+  color: #6f6f6f;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.saga-item{
+  border: 0;
+  background: transparent;
+}
+
+.saga-item .card__body{
+  padding: 18px 0;
+  text-align: left;
+}
+
+.saga-item .card__title{
+  text-align: left;
+  font-size: 24px;
+  margin-bottom: 6px;
+}
+
+.saga-item .card__text{
+  max-width: none;
+  margin: 0;
+  text-align: left;
+}
+
+.backline{
+  margin-top: 22px;
+  padding-top: 35px;
+}
+
+/* =========================================================
+   Footer
+   ========================================================= */
+
+footer{
+  color: #8a8a8a;
+  font-size: 12px;
+  text-align: center;
+  padding: 26px 18px 40px;
+  margin-top: 32px;
+}
+
+/* =========================================================
+   Stopp-box
+   ========================================================= */
+
+.stop-box{
+  max-width: 980px;
+  margin: 28px auto;
+  padding: 18px 18px 16px;
+  border: 1px solid rgba(0,0,0,.14);
+  border-radius: 16px;
+  background: rgba(250,247,245,.9);
+}
+
+.stop-box__title{
+  margin: 0 0 8px 0;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: .95rem;
+  opacity: .9;
+}
+
+.stop-box__text{
+  margin: 0;
+  line-height: 1.7;
+  font-size: 1rem;
+  opacity: .9;
+}
+
+.stop-box__actions{ margin-top: 14px; }
+
+.stop-box__btn{
+  display: inline-block;
+  padding: 10px 14px;
+  border-radius: 999px;
+  text-decoration: none;
+  border: 1px solid rgba(0,0,0,.18);
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  font-size: .85rem;
+}
+
+/* =========================================================
+   Böcker – listläge
+   ========================================================= */
+
+.media-box{
+  display: grid;
+  grid-template-columns: var(--book-cover-w) 1fr;
+  gap: 22px;
+  padding: 22px 0;
+  border-bottom: 1px dashed var(--line);
+  align-items: start;
+}
+
+.media-box:last-child{ border-bottom: 0; }
+
+.media-box__img{
+  display: block;
+  width: var(--book-cover-w);
+  border: 1px dashed var(--line);
+  background: #fff;
+  overflow: hidden;
+}
+
+.media-box__img img{
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: var(--book-cover-maxh);
+  object-fit: cover;
+}
+
+.media-box__content{
+  align-self: start;
+  min-width: 0;
+}
+
+.media-box__title{
+  margin: 2px 0 10px;
+  font-size: clamp(22px, 2.2vw, 28px);
+  line-height: 1.2;
+  letter-spacing: .02em;
+  color: #6b6b6b;
+}
+
+.media-box__text{
+  margin: 0 0 14px;
+  color: #6f6f6f;
+  font-size: 16px;
+  line-height: 1.7;
+  max-width: 70ch;
+}
+
+/* =========================================================
+   Book slug (landning)
+   ========================================================= */
+
+.book-page{ margin-top: 10px; }
+
+.book-hero2{ padding: 10px 0 26px; }
+
+.book-hero2__grid{
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 36px;
+  align-items: center;
+}
+
+.book-hero2__cover{
+  margin: 0;
+  padding: 14px;
+  border: 1px dashed var(--line);
+  background: #fff;
+  box-shadow: 0 18px 40px rgba(0,0,0,.10);
+}
+
+.book-hero2__cover img{
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.book-hero2__kicker{
+  margin: 0 0 10px;
+  font-size: 12px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: #9a9a9a;
+}
+
+.book-hero2__title{
+  margin: 0 0 14px;
+  font-size: clamp(36px, 4.6vw, 64px);
+  line-height: 1.03;
+  letter-spacing: .01em;
+  color: #6b6b6b;
+}
+
+.book-hero2__lead{
+  margin: 0 0 18px;
+  max-width: 62ch;
+  font-size: 18px;
+  line-height: 1.85;
+  color: #6a6a6a;
+}
+
+.book-hero2__buy{
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 8px 0 18px;
+}
+
+.buybtn{
+  display: inline-block;
+  padding: 10px 14px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 12px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  border: 1px solid var(--line);
+}
+
+.buybtn--primary{
+  background: #2f2f2f;
+  border-color: #2f2f2f;
+  color: #fff;
+}
+
+.buybtn--ghost{
+  background: transparent;
+  color: #2f2f2f;
+}
+
+/* FIX: vit text på svart knapp (inkl. visited) */
+.buybtn--primary,
+.buybtn--primary:link,
+.buybtn--primary:visited,
+.buybtn--primary:hover,
+.buybtn--primary:active{
+  color: #fff !important;
+}
+
+/* Köp-kort */
+.buy-grid{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.store-card{
+  display: block;
+  border: 1px dashed var(--line);
+  background: #fff;
+  padding: 14px 14px 12px;
+}
+
+.store-card__name{
+  display: block;
+  font-weight: 700;
+  color: #2f2f2f;
+  letter-spacing: .04em;
+}
+
+.store-card__meta{
+  display: block;
+  margin-top: 8px;
+  padding-bottom: 15px;
+  font-size: 12px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: #9a9a9a;
+}
+
+.store-card:hover{ opacity: .92; }
+
+/* Citatkort */
+.quote-cards{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.quote-card{
+  margin: 0;
+  padding: 16px 16px 14px;
+  border: 1px dashed var(--line);
+  background: #fff;
+}
+
+.quote-card blockquote{
+  margin: 0;
+  font-style: italic;
+  color: #5a5a5a;
+  line-height: 1.8;
+}
+
+.quote-card figcaption{
+  margin-top: 10px;
+  font-size: 11px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: #9a9a9a;
+}
+
+/* =========================================================
+   Author-slab (smal som läsytan)
+   ========================================================= */
+
+.author-slab{
+  margin: 55px auto 0;
+  border: 1px solid rgba(0,0,0,.14);
+  border-radius: 18px;
+  background: rgba(250,247,245,.9);
+  max-width: 80ch;
+}
+
+.author-slab__inner{
+  display: grid;
+  grid-template-columns: 1.2fr .8fr;
+  gap: 18px;
+  padding: 18px;
+}
+
+.author-slab__h{
+  margin: 0 0 10px;
+  font-size: 14px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: #7a7a7a;
+  text-align: left;
+}
+
+.author-slab__text p{
+  margin: 0 0 12px;
+  line-height: 1.85;
+  color: #6a6a6a;
+}
+
+.author-slab__cta{
+  border-left: 1px dashed var(--line);
+  padding-left: 18px;
+}
+
+.author-slab__cta h4{
+  margin: 0 0 8px;
+  font-size: 14px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: #7a7a7a;
+}
+
+.author-slab__cta p{
+  margin: 0 0 12px;
+  line-height: 1.75;
+  color: #6a6a6a;
+}
+
+.fineprint{
+  margin: 12px 0 0 !important;
+  font-size: 12px;
+  color: #9a9a9a;
+}
+
+/* =========================================================
+   Responsivt (layout)
+   ========================================================= */
+
+@media (max-width: 860px){
+  .grid{ grid-template-columns: 1fr; }
+  .prose{ font-size: 17px; }
+}
+
+@media (max-width: 768px){
+  .stop-box{ margin: 22px 12px; padding: 16px; }
+}
+
+@media (max-width: 980px){
+  .book-hero2__grid{
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .quote-cards{ grid-template-columns: 1fr; }
+  .buy-grid{ grid-template-columns: 1fr; }
+
+  .author-slab__inner{ grid-template-columns: 1fr; }
+  .author-slab__cta{
+    border-left: 0;
+    border-top: 1px dashed var(--line);
+    padding-left: 0;
+    padding-top: 14px;
+  }
+}
+
+/* Böcker: mobil-lista */
+@media (max-width: 720px){
+  :root{
+    --book-cover-w: 320px;
+    --book-cover-maxh: 420px;
+  }
+
+  .media-box{
+    grid-template-columns: 1fr;
+    gap: 14px;
+    padding: 18px 0;
+  }
+
+  .media-box__img{
+    width: 100%;
+    max-width: 320px;
+  }
+}
+
+/* =========================================================
+   Mobilmeny (dropdown)
+   Kräver JS som togglar .nav.is-open
+   ========================================================= */
+
+@media (max-width: 860px){
+
+  /* Mer luft i mobilen */
+  .topbar{
+    padding: 22px 0 28px;
+  }
+
+  .topbar__inner{
+    justify-content: space-between;
+    gap: 14px;
+  }
+
+  .nav-toggle{
+    display: inline-block;
+  }
+
+  /* DÖLJ länkraden i mobil tills öppnad */
+  .nav{
+    display: none;
+    position: absolute;
+    left: 18px;
+    right: 18px;
+    top: calc(100% + 10px);
+
+    background: var(--paper);
+    border: 1px dashed var(--line);
+    box-shadow: var(--shadow);
+    padding: 10px 12px;
+    z-index: 1000;
+  }
+
+  .nav.is-open{
+    display: grid;
+    gap: 6px;
+  }
+
+  /* Dropdown-länkar: ingen underline-pseudo */
+  .nav a{
+    padding: 12px 10px;
+    font-size: 13px;
+  }
+  .nav a::after{ display: none; }
+
+  .nav a{
+    border-bottom: 1px solid rgba(0,0,0,.06);
+  }
+  .nav a:last-child{ border-bottom: 0; }
+
+  /* Luft mellan topbar och hero */
+  .hero{ margin-top: 6px; }
+}
+
+/* =========================================================
+   BOOK SLUG – 
+   ========================================================= */
+
+.book-page{
+  margin-top: 10px;
+}
+
+/* HERO */
+.book-hero2{
+  padding: 10px 0 26px;
+}
+
+.book-hero2__grid{
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 36px;
+  align-items: center;
+}
+
+.book-hero2__cover{
+  margin: 0;
+  padding: 14px;
+  border: 1px dashed var(--line);
+  background: #fff;
+  box-shadow: 0 18px 40px rgba(0,0,0,.10);
+}
+
+.book-hero2__cover img{
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.book-hero2__kicker{
+  margin: 0 0 10px;
+  font-size: 12px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: #9a9a9a;
+}
+
+.book-hero2__title{
+  margin: 0 0 14px;
+  font-size: clamp(36px, 4.6vw, 64px);
+  line-height: 1.03;
+  letter-spacing: .01em;
+  color: #6b6b6b;
+}
+
+.book-hero2__lead{
+  margin: 0 0 18px;
+  max-width: 62ch;
+  font-size: 18px;
+  line-height: 1.85;
+  color: #6a6a6a;
+}
+
+.book-hero2__buy{
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 8px 0 18px;
+}
+
+/* FAKTA-RAD (Genre / Ton / Tema osv.) */
+.book-facts{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+}
+
+.book-facts div{
+  border: 1px dashed var(--line);
+  background: rgba(255,255,255,.85);
+  padding: 10px 12px;
+}
+
+.book-facts dt{
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: #9a9a9a;
+}
+
+.book-facts dd{
+  margin: 6px 0 0;
+  color: #5f5f5f;
+  font-size: 14px;
+}
+
+/* BAND (citat) */
+.book-band{
+/*  border-top: 1px dashed var(--line);
+  border-bottom: 1px dashed var(--line);
+*/
+  padding: 24px 0;
+  margin: 10px 0 28px;
+  background: rgba(255,255,255,.55);
+}
+
+.book-band__inner{
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.book-h{
+  margin: 0 0 14px;
+  font-size: 14px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: #7a7a7a;
+}
+
+/* Citatkort */
+.quote-cards{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.quote-card{
+  margin: 0;
+  padding: 16px 16px 14px;
+  border: 1px dashed var(--line);
+  background: #fff;
+}
+
+.quote-card blockquote{
+  margin: 0;
+  font-style: italic;
+  color: #5a5a5a;
+  line-height: 1.8;
+}
+
+.quote-card figcaption{
+  margin-top: 10px;
+  font-size: 11px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: #9a9a9a;
+}
+
+/* PROSE (utdrag/om boken) */
+.book-prose{
+  max-width: 76ch;
+  margin: 0 auto 34px;
+}
+
+.book-prose p{
+  font-size: 18px;
+  line-height: 1.9;
+  color: #6a6a6a;
+ /* margin: 0 0 1.4em; */
+}
+
+/* Dropcap (om du använder <span class="drop">F</span>...) */
+.drop{
+  float: left;
+  font-size: 3.2em;
+  line-height: .9;
+  padding-right: .10em;
+  font-weight: 700;
+  color: #4f4f4f;
+}
+
+/* “Poem”-ruta */
+.poem{
+  border: 1px dashed var(--line);
+  background: rgba(255,255,255,.85);
+  padding: 18px 18px 16px;
+}
+
+.poem p{
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.9;
+  color: #5a5a5a;
+}
+
+.tale{
+  border: 1px dashed var(--line);
+  background: rgba(255,255,255,.85);
+  padding: 18px 18px 16px;
+}
+
+.tale p{
+  font-size: 18px;
+  line-height: 1.9;
+  color: #5a5a5a;
+}
+
+/* Köp-kort */
+.buy-grid{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.store-card{
+  display: block;
+  border: 1px dashed var(--line);
+  background: #fff;
+  padding: 14px 14px 12px;
+}
+
+.store-card__name{
+  display: block;
+  font-weight: 700;
+  color: #2f2f2f;
+  letter-spacing: .04em;
+}
+
+.store-card__meta{
+  display: block;
+  margin-top: 8px;
+  font-size: 12px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: #9a9a9a;
+}
+
+.store-card:hover{
+  opacity: .92;
+}
+
+/* Responsivt */
+@media (max-width: 980px){
+  .book-hero2__grid{
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .book-hero2__cover{
+    max-width: 420px;
+  }
+
+  .quote-cards{
+    grid-template-columns: 1fr;
+  }
+
+  .buy-grid{
+    grid-template-columns: 1fr;
+  }
+
+  .book-facts{
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================================================
+   Sociala medier
+   ========================================================= */
+
+.social{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.social__card{
+  display: grid;
+  grid-template-columns: 44px 1fr 18px;
+  align-items: center;
+  gap: 12px;
+
+  padding: 14px 14px;
+  border: 1px dashed var(--line);
+  background: rgba(255,255,255,.75);
+  text-decoration: none;
+}
+
+.social__card:hover{
+  background: #fff;
+  box-shadow: var(--shadow);
+}
+
+.social__icon{
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,.14);
+  background: #fff;
+
+  font-size: 12px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: #2f2f2f;
+}
+
+.social__meta{
+  min-width: 0;
+}
+
+.social__name{
+  display: block;
+  font-weight: 700;
+  color: #2f2f2f;
+  letter-spacing: .02em;
+}
+
+.social__handle{
+  display: block;
+  margin-top: 6px;
+  color: #7a7a7a;
+  font-size: 12px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.social__arrow{
+  color: #9a9a9a;
+  font-size: 16px;
+  justify-self: end;
+}
+
+/* Responsivt */
+@media (max-width: 860px){
+  .social{
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================================================
+   Kontaktformulär (Formspree)
+   ========================================================= */
+.contact{
+  max-width: 70ch;
+  margin: 0 auto;
+  display: grid;
+  gap: 14px;
+}
+
+.contact__label{
+  display: grid;
+  gap: 8px;
+  color: #6a6a6a;
+  font-size: 13px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.contact__input,
+.contact__textarea{
+  width: 100%;
+  font: inherit;
+  letter-spacing: normal;
+  text-transform: none;
+
+  border: 1px dashed var(--line);
+  background: #fff;
+  padding: 12px 12px;
+  border-radius: 10px;
+  color: #2f2f2f;
+}
+
+.contact__textarea{
+  resize: vertical;
+  line-height: 1.7;
+}
+
+.contact__input:focus,
+.contact__textarea:focus{
+  outline: none;
+  box-shadow: var(--shadow);
+}
+
+.contact__hp{ display:none; }
+
+/* Om mig – centrera text vertikalt mot bilden */
+.media-box--centered{
+  align-items: center;
+}
+
+/* Gör texten lite mer "statement" */
+.media-box__text--lead{
+  font-size: 18px;
+  line-height: 1.8;
+  max-width: 60ch;
+}
+
+/* Om mig – centrera text exakt i höjdled mot bilden */
+.media-box--centered .media-box__content{
+  align-self: center;
+  text-align: left;
+}
+
+/* =========================================================
+   DIKTER – smal satsyta + footer/note (balanserad)
+   ========================================================= */
+
+/* En smal kolumn för ALLT på diktsidan */
+.poem-wrap{
+  max-width: 53ch;        /* <-- smalare satsyta */
+  margin: 0 auto;         /* centrerar kolumnen på sidan */
+}
+
+/* Rubrik: mindre + vänsterställd i samma kolumn som texten */
+.poem-title{
+  margin: 0 0 10px;
+  font-size: clamp(22px, 2.6vw, 32px);
+  font-weight: 600;
+  letter-spacing: .03em;
+  color: #6b6b6b;
+  text-align: left;
+}
+
+/* Själva dikten */
+.poem-body p{
+  margin: 0 0 1.7em;
+  font-size: 17px;
+  line-height: 1.75;
+  color: #5f5f5f;
+  text-align: left;
+}
+
+/* Footer: samma luft ner till “Tillbaka” som upp från sista raden */
+.poem-footer{
+  margin-top: 34px;       /* luft från sista raden i dikten */
+}
+
+/* Notisruta (samma kolumnbredd) */
+.poem-collection{
+  padding: 16px 18px 14px;
+  border: 1px dashed var(--line);
+  background: rgba(255,255,255,.65);
+
+  font-size: 16px;
+  line-height: 1.7;
+  color: #7a7a7a;
+}
+
+/* Länkar i rutan – samma effekt som .prose a */
+.poem-collection a{
+  color: #2f2f2f;
+  text-decoration: none;
+  border-bottom: 1px dotted #2f2f2f;
+}
+.poem-collection a:hover{
+  opacity: .85;
+  border-bottom: 2px solid #2f2f2f;
+}
+
+/* Tillbaka-länk: lika mycket luft som ovanför rutan */
+.poem-back{
+  margin-top: 34px;
+}
+
+/* Mobil: lite bredare så det inte blir för trångt */
+@media (max-width: 720px){
+  .poem-wrap{ max-width: 34ch; }
+  .poem-body p{ font-size: 16px; line-height: 1.7; }
+}

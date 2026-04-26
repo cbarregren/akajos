@@ -1,0 +1,109 @@
+/* =========================================================
+   Press / Om mig – pressblock
+   ========================================================= */
+
+.pressblock{
+  display: grid;
+  grid-template-columns: 160px 1fr; /* bilder | text */
+  gap: 28px;
+  max-width: 90ch;
+  margin: 0 auto;
+  text-align: left;
+  align-items: flex-start;
+}
+
+
+
+/* =========================================================
+   Vänster kolumn – bilder
+   ========================================================= */
+
+.pressblock__images{
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: 20px; /* liten visuell justering */
+}
+
+.pressblock__images a{
+  display: block;
+}
+
+.pressblock__images img{
+  width: 160px;
+  height: auto;
+  display: block;
+  border: 1px dashed var(--line);
+  background: #fff;
+  object-fit: cover;
+  transition: opacity .15s ease;
+}
+
+.pressblock__images a:hover img{
+  opacity: .92;
+}
+
+/* =========================================================
+   Höger kolumn – text
+   ========================================================= */
+
+.pressblock__content{
+  min-width: 0; /* förhindrar overflow */
+}
+
+.pressblock__title{
+  margin: 0 0 18px;
+  font-size: 14px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: #7a7a7a;
+}
+
+.pressblock__text{
+  margin: 0 0 24px;
+  font-size: 18px;
+  line-height: 1.8;
+  color: #5f5f5f;
+}
+
+.pressblock__text strong{
+  color: #4f4f4f;
+  font-weight: 600;
+}
+
+.pressblock__text a{
+  color: #2f2f2f;
+  text-decoration: none;
+  border-bottom: 1px dotted #2f2f2f;
+}
+
+.pressblock__text a:hover{
+  opacity: .85;
+  border-bottom: 2px solid #2f2f2f;
+}
+
+/* =========================================================
+   Responsivt
+   ========================================================= */
+
+@media (max-width: 900px){
+  .pressblock{
+    gap: 22px;
+  }
+}
+
+@media (max-width: 720px){
+  .pressblock{
+    grid-template-columns: 1fr;
+  }
+
+  .pressblock__images{
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 0;
+  }
+
+  .pressblock__images img{
+    width: 120px;
+  }
+}
