@@ -184,7 +184,7 @@ if ($totalPages > 0 && $page > $totalPages) {
               <nav style="display:flex; align-items:center; justify-content:space-between; gap:14px; margin-top:24px;">
                 <div>
                   <?php if ($page > 1): ?>
-                    <a class="card__link" href="/en/sagas/?page=<?php echo $page - 1; ?>">Previous</a>
+                    <a class="card__link" href="/en/sagas/?page=<?php echo $page - 1; ?><?php echo $activeTag !== '' ? '&tag=' . urlencode($activeTag) : ''; ?>">Previous</a>
                   <?php endif; ?>
                 </div>
                 <div style="color:#9a9a9a; font-size:12px; letter-spacing:.12em; text-transform:uppercase;">
@@ -192,7 +192,7 @@ if ($totalPages > 0 && $page > $totalPages) {
                 </div>
                 <div>
                   <?php if ($page < $totalPages): ?>
-                    <a class="card__link" href="/en/sagas/?page=<?php echo $page + 1; ?>">Next</a>
+                    <a class="card__link" href="/en/sagas/?page=<?php echo $page + 1; ?><?php echo $activeTag !== '' ? '&tag=' . urlencode($activeTag) : ''; ?>">Next</a>
                   <?php endif; ?>
                 </div>
               </nav>

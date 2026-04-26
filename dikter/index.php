@@ -215,7 +215,7 @@ if ($totalPages > 0 && $page > $totalPages) {
               <nav style="display:flex; align-items:center; justify-content:space-between; gap:14px; margin-top:24px;">
                 <div>
                   <?php if ($page > 1): ?>
-                    <a class="card__link" href="<?php echo url('/dikter/?page=' . ($page - 1)); ?>">Föregående</a>
+                    <a class="card__link" href="<?php echo url('/dikter/?page=' . ($page - 1) . ($activeTag !== '' ? '&tag=' . urlencode($activeTag) : '')); ?>">Föregående</a>
                   <?php endif; ?>
                 </div>
 
@@ -225,7 +225,7 @@ if ($totalPages > 0 && $page > $totalPages) {
 
                 <div>
                   <?php if ($page < $totalPages): ?>
-                    <a class="card__link" href="<?php echo url('/dikter/?page=' . ($page + 1)); ?>">Nästa</a>
+                    <a class="card__link" href="<?php echo url('/dikter/?page=' . ($page + 1) . ($activeTag !== '' ? '&tag=' . urlencode($activeTag) : '')); ?>">Nästa</a>
                   <?php endif; ?>
                 </div>
               </nav>

@@ -193,7 +193,7 @@ Varje återskap bär originalets tonfall, men står samtidigt på egna ben.
               <nav style="display:flex; align-items:center; justify-content:space-between; gap:14px; margin-top:24px;">
                 <div>
                   <?php if ($page > 1): ?>
-                    <a class="card__link" href="/klassiker/?page=<?php echo $page - 1; ?>">Föregående</a>
+                    <a class="card__link" href="/klassiker/?page=<?php echo $page - 1; ?><?php echo $activeTag !== '' ? '&tag=' . urlencode($activeTag) : ''; ?>">Föregående</a>
                   <?php endif; ?>
                 </div>
                 <div style="color:#9a9a9a; font-size:12px; letter-spacing:.12em; text-transform:uppercase;">
@@ -201,7 +201,7 @@ Varje återskap bär originalets tonfall, men står samtidigt på egna ben.
                 </div>
                 <div>
                   <?php if ($page < $totalPages): ?>
-                    <a class="card__link" href="/klassiker/?page=<?php echo $page + 1; ?>">Nästa</a>
+                    <a class="card__link" href="/klassiker/?page=<?php echo $page + 1; ?><?php echo $activeTag !== '' ? '&tag=' . urlencode($activeTag) : ''; ?>">Nästa</a>
                   <?php endif; ?>
                 </div>
               </nav>
